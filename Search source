@@ -1,0 +1,78 @@
+Para sa challenge na ito, hindi ko kailangan i-access mismo yung URL. Ang hint ang clue:
+
+> "How could you mirror the website on your local machine so you could use more powerful tools for searching?"
+
+Gawin mo ito:
+
+### 1. I-mirror ang website
+
+Sa terminal:
+
+```bash
+wget -r http://saturn.picoctf.net:57573/
+```
+
+Pagkatapos, magkakaroon ka ng folder na may kopya ng website.
+
+### 2. Hanapin ang artifact
+
+Pumasok sa folder:
+
+```bash
+cd saturn.picoctf.net:57573
+```
+
+Hanapin lahat ng files:
+
+```bash
+find . -type f
+```
+
+Tapos search:
+
+```bash
+grep -R "picoCTF" .
+```
+
+Kung walang lumabas:
+
+```bash
+grep -R "flag" .
+```
+
+### 3. Tingnan ang hidden files
+
+```bash
+find . -name ".*"
+```
+
+Hanapin lalo na:
+
+```
+.git
+.env
+.bak
+.old
+```
+
+Kung may `.git`:
+
+```bash
+git log
+```
+
+tapos:
+
+```bash
+git show <commit>
+```
+
+Madalas ang ganitong picoCTF challenge ay may naiwan na **important artifact sa git history** o isang hidden file.
+
+Kung gusto mo mas mabilis, i-run mo ito pagkatapos ng `wget`:
+
+```bash
+grep -R "picoCTF{" .
+```
+
+I-send mo yung output ng `find . -type f` kung wala pa makita.
